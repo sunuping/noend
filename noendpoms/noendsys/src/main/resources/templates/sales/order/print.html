@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: head('Noend','/static/css/print-content.css')">
+</head>
+<body class="fix-header card-no-border fix-sidebar">
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Pro</p>
+    </div>
+</div>
+
+<div id="main-wrapper">
+
+    <header class="topbar" th:replace="common/common :: topbar">
+    </header>
+
+    <aside class="left-sidebar" th:replace="common/common :: left-sidebar">
+    </aside>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">订单管理</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+                        <li class="breadcrumb-item">销售管理</li>
+                        <li class="breadcrumb-item active">订单管理</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                            class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+
+            <!-- Row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-info">
+                            <h4 class="m-b-0 text-white">订单打印</h4>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-info" id="print-content-btn">打印</button>
+                            <div id="print-content">
+                                <table class="table" id="print-table">
+                                    <thead class="tdbn">
+                                    <tr class="tdbn">
+                                        <td class="tdc tdbn" colspan="10" style="font-size: 25px;font-weight: bold">江西大药房生物科技有限公司产品出库单</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="tdbn">
+                                    <tr class="tdbn">
+                                        <td class="tdl tdbn" colspan="7"  th:text="'收货单位:'+${order.receiptName}"></td>
+                                        <td class="tdbn" colspan="3"  th:text="'出货日期:'+${#dates.format(order.createTime,'yyyy年MM月dd日')}"></td>
+                                    </tr>
+                                    <tr class="tdbn" style="font-size: 15px; ">
+                                        <td class="tdl tdbn" colspan="7">供货单位:江西大药房生物科技有限公司</td>
+                                        <td class="tdbn" colspan="3">公司电话:0796-2516666</td>
+                                    </tr>
+                                    <tr style="font-size: 15px; font-weight: bold;">
+                                        <td class="tdc">产品名称</td>
+                                        <td class="tdc">规格</td>
+                                        <td class="tdc">单位</td>
+                                        <td class="tdc">数量</td>
+                                        <td class="tdc">单价</td>
+                                        <td class="tdc">金额</td>
+                                        <td class="tdc">卫生许可证</td>
+                                        <td class="tdc">生产批号</td>
+                                        <td class="tdc">有效期至</td>
+                                        <td class="tdc">质量</td>
+                                    </tr>
+                                    <tr style="font-size: 15px; " th:each="r:${outboundOrders}">
+                                        <td class="tdl" th:text="${r.commodityName}"></td>
+                                        <td class="tdc" th:text="${r.commodityNorm}"></td>
+                                        <td class="tdc" th:text="${r.commodityUnit}"></td>
+                                        <td class="tdc" th:text="${r.amount}"></td>
+                                        <td class="tdc" th:text="${r.unitPrice}"></td>
+                                        <td class="tdc" th:text="${#numbers.formatDecimal((r.unitPrice*r.amount),1,2)}"></td>
+                                        <td class="tdc" th:text="${r.commodityHealthPermit}">卫生许可证</td>
+                                        <td class="tdc" th:text="${r.commodityLotNumber}">生产批号</td>
+                                        <td class="tdc" th:text="${r.commodityValidUntil}">有效期至</td>
+                                        <td class="tdc" th:text="${r.commodityQuality}">质量</td>
+                                    </tr>
+
+                                    <tr th:if="${outboundOrderSize} lt 2" style="height: 47.78px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr th:if="${outboundOrderSize} lt 3" style="height: 47.78px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr style="font-size: 15px; font-weight: bold;">
+                                        <td colspan="5" th:text="'本页合计小写：'+${order.lumpSum}"></td>
+                                        <td colspan="5" th:text="'本单号总计金额小写：'+${order.lumpSum}"></td>
+                                    </tr>
+                                    <tr style="font-size: 15px; font-weight: bold;">
+                                        <td colspan="5" th:text="'本页合计大写：'+${order.lumpSumChinese}"></td>
+                                        <td colspan="5" th:text="'本单号总计金额大写：'+${order.lumpSumChinese}"></td>
+                                    </tr>
+                                    <tr class="tdbn" style="font-size: 15px; ">
+                                        <td colspan="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公司地址：江西省古安市永丰县城北坪下</td>
+                                    </tr>
+                                    <tr class="tdbn" style="font-size: 15px; ">
+                                        <td colspan="10" th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收货单位地址:'+${order.receiptAddress}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div th:replace="common/common :: js('https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.0/jQuery.print.min.js')"></div>
+<script>
+    $(function () {
+        //打印
+        $('#print-content-btn').on("click", function () {
+            $("#print-content").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: null,
+                noPrintSelector: ".no-print",
+                iframe: false,
+                append: null,
+                prepend: null,
+                manuallyCopyFormValues: true,
+                deferred: $.Deferred(),
+                timeout: 750,
+                title: null,
+                doctype: '<!doctype html>'
+            })
+        });
+        $(".submit").click(function () {
+            $.ajax({
+                url: "/sales/commodity/modify",
+                dataType: "json",
+                type: "post",
+                data: {
+                    "id": $("#id").val(),
+                    "name": $("#name").val(),
+                    "norm": $("#norm").val(),
+                    "lotNumber": $("#lotNumber").val(),
+                    "inventory": $("#inventory").val(),
+                    "retailPrice": $("#retailPrice").val(),
+                    "supplyPrice": $("#supplyPrice").val(),
+                    "wholesalePrice": $("#wholesalePrice").val(),
+                    "remark": $("#remark").val(),
+                },
+                success: function (result) {
+                    if (result.code == 1) {
+                        alert("修改成功！");
+                        window.location.href = '/sales/commodity/list';
+                    }
+                }
+            })
+        })
+    })
+</script>
+</body>
+
+</html>

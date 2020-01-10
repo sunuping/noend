@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunup.noend.mapper.OutboundOrderMapper">
+    <resultMap id="BaseResultMap" type="com.sunup.noend.entity.OutboundOrder">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="commodity_id" jdbcType="INTEGER" property="commodityId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_username" jdbcType="VARCHAR" property="createUsername"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_username" jdbcType="VARCHAR" property="updateUsername"/>
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="commodity_name" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="commodity_norm" jdbcType="VARCHAR" property="commodityNorm"/>
+        <result column="commodity_lot_number" jdbcType="VARCHAR" property="commodityLotNumber"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <result column="unit_price" jdbcType="DOUBLE" property="unitPrice"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, order_number, company_id, commodity_id, status, create_username, create_user_id, 
+    create_time, update_username, update_user_id, update_time, remark, company_name, 
+    commodity_name, commodity_norm, commodity_lot_number, amount, unit_price
+  </sql>
+    <select id="selectAllByOrderNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        too.id, too.order_number, too.company_id, too.commodity_id, too.status,too.remark, too.company_name,
+        too.commodity_name, too.commodity_norm, too.commodity_lot_number, too.amount, too.unit_price
+        ,tc.unit as commodityUnit
+        ,tc.valid_until as commodityValidUntil
+        ,tc.quality as commodityQuality
+        ,tc.health_permit as commodityHealthPermit
+        from t_outbound_order as too
+        left join t_commodity as tc on tc.id = too.commodity_id
+        where too.order_number = #{orderNumber}
+    </select>
+    <select id="selectAmountByOrderNumber" parameterType="java.lang.String" resultType="java.lang.Double">
+        select	sum(unit_price*amount) from t_outbound_order where order_number=#{orderNumber}
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>,
+        tc.unit as commodityUnit,tc.valid_until as commodityValidUntil,tc.quality as commodityQuality,tc.health_permit as commodityHealthPermit
+        from t_outbound_order as too
+        left join t_commodity as tc on too.commodity_id=tc.id
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_outbound_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByOrderNumber" parameterType="java.lang.String">
+        delete from t_outbound_order where order_number=#{orderNumber,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.sunup.noend.entity.OutboundOrder">
+    insert into t_outbound_order (id, order_number, company_id, 
+      commodity_id, status, create_username, 
+      create_user_id, create_time, update_username, 
+      update_user_id, update_time, remark, 
+      company_name, commodity_name, commodity_norm, 
+      commodity_lot_number, amount, unit_price
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, 
+      #{commodityId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createUsername,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUsername,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, #{commodityNorm,jdbcType=VARCHAR}, 
+      #{commodityLotNumber,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{unitPrice,jdbcType=DOUBLE}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.sunup.noend.entity.OutboundOrder">
+        insert into t_outbound_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="commodityId != null">
+                commodity_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUsername != null">
+                create_username,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUsername != null">
+                update_username,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="commodityName != null">
+                commodity_name,
+            </if>
+            <if test="commodityNorm != null">
+                commodity_norm,
+            </if>
+            <if test="commodityLotNumber != null">
+                commodity_lot_number,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderNumber != null">
+                #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createUsername != null">
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUsername != null">
+                #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityNorm != null">
+                #{commodityNorm,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityLotNumber != null">
+                #{commodityLotNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into t_outbound_order (id, order_number, company_id,
+        commodity_id, status, create_username,
+        create_user_id, create_time, update_username,
+        update_user_id, update_time, remark,
+        company_name, commodity_name, commodity_norm,
+        commodity_lot_number, amount, unit_price
+        )
+        values
+        <foreach collection="objs" item="o" separator=",">
+            (#{o.id,jdbcType=INTEGER},
+            #{o.orderNumber,jdbcType=VARCHAR},
+            #{o.companyId,jdbcType=INTEGER},
+            #{o.commodityId,jdbcType=INTEGER},
+            #{o.status,jdbcType=INTEGER},
+            #{o.createUsername,jdbcType=VARCHAR},
+            #{o.createUserId,jdbcType=INTEGER},
+            #{o.createTime,jdbcType=TIMESTAMP},
+            #{o.updateUsername,jdbcType=VARCHAR},
+            #{o.updateUserId,jdbcType=INTEGER},
+            #{o.updateTime,jdbcType=TIMESTAMP},
+            #{o.remark,jdbcType=VARCHAR},
+            #{o.companyName,jdbcType=VARCHAR},
+            #{o.commodityName,jdbcType=VARCHAR},
+            #{o.commodityNorm,jdbcType=VARCHAR},
+            #{o.commodityLotNumber,jdbcType=VARCHAR},
+            #{o.amount,jdbcType=INTEGER},
+            #{o.unitPrice,jdbcType=DOUBLE})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunup.noend.entity.OutboundOrder">
+        update t_outbound_order
+        <set>
+            <if test="orderNumber != null">
+                order_number = #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityId != null">
+                commodity_id = #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createUsername != null">
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUsername != null">
+                update_username = #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodity_name = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityNorm != null">
+                commodity_norm = #{commodityNorm,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityLotNumber != null">
+                commodity_lot_number = #{commodityLotNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sunup.noend.entity.OutboundOrder">
+    update t_outbound_order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_username = #{createUsername,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_username = #{updateUsername,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_norm = #{commodityNorm,jdbcType=VARCHAR},
+      commodity_lot_number = #{commodityLotNumber,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

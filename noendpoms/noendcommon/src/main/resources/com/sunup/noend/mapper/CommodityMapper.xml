@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunup.noend.mapper.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.sunup.noend.entity.Commodity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="norm" jdbcType="VARCHAR" property="norm" />
+    <result column="lot_number" jdbcType="VARCHAR" property="lotNumber" />
+    <result column="inventory" jdbcType="INTEGER" property="inventory" />
+    <result column="retail_price" jdbcType="DOUBLE" property="retailPrice" />
+    <result column="supply_price" jdbcType="DOUBLE" property="supplyPrice" />
+    <result column="wholesale_price" jdbcType="DOUBLE" property="wholesalePrice" />
+    <result column="create_username" jdbcType="VARCHAR" property="createUsername" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_username" jdbcType="VARCHAR" property="updateUsername" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="health_permit" jdbcType="VARCHAR" property="healthPermit" />
+    <result column="valid_until" jdbcType="DATE" property="validUntil" />
+    <result column="quality" jdbcType="VARCHAR" property="quality" />
+    <result column="name_pinyin" jdbcType="VARCHAR" property="namePinyin" />
+    <result column="name_pinyin_first" jdbcType="VARCHAR" property="namePinyinFirst" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, norm, lot_number, inventory, retail_price, supply_price, wholesale_price, 
+    create_username, create_user_id, create_time, update_username, update_user_id, update_time, 
+    remark, amount, unit, health_permit, valid_until, quality, name_pinyin, name_pinyin_first
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,name from t_commodity
+  </select>
+  <!--  select page-->
+  <!--  select count-->
+  <select id="selectCount" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_commodity as tc
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where locate(#{searchValue},name)>0
+    </if>
+  </select>
+  <select id="selectCountBySearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_commodity as tc
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where name=#{searchValue} or name_pinyin=#{searchValue} or name_pinyin_first=#{searchValue}
+    </if>
+  </select>
+  <select id="selectCountByPinyinSearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_commodity as tc
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where match(name_pinyin)against(concat(#{searchValue},'*') in boolean mode)
+    </if>
+  </select>
+  <select id="selectCountByPinyinFirstSearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_commodity as tc
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where match(name_pinyin_first)against(concat(#{searchValue},'*')in boolean mode)
+    </if>
+  </select>
+  <!--  select count-->
+  <select id="selectPage" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_commodity
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where locate(#{searchValue},name)>0
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <select id="selectPageBySearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    id, name, norm, lot_number, inventory, retail_price,supply_price, wholesale_price,quality,health_permit,unit,valid_until,create_time
+    from t_commodity
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where name=#{searchValue} or name_pinyin=#{searchValue} or name_pinyin_first=#{searchValue}
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <select id="selectPageByPinyinSearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    id, name, norm, lot_number, inventory, retail_price,supply_price, wholesale_price,quality,health_permit,unit,valid_until,create_time
+    from t_commodity
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where match(name_pinyin)against(concat(#{searchValue},'*') in boolean mode)
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <select id="selectPageByPinyinFirstSearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    id, name, norm, lot_number, inventory, retail_price,supply_price, wholesale_price,quality,health_permit,unit,valid_until,create_time
+    from t_commodity
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where match(name_pinyin_first)against(concat(#{searchValue},'*')in boolean mode)
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <!--  select page-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sunup.noend.entity.Commodity">
+    insert into t_commodity (id, name, norm, 
+      lot_number, inventory, retail_price, 
+      supply_price, wholesale_price, create_username, 
+      create_user_id, create_time, update_username, 
+      update_user_id, update_time, remark, 
+      amount, unit, health_permit, 
+      valid_until, quality, name_pinyin, 
+      name_pinyin_first)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{norm,jdbcType=VARCHAR}, 
+      #{lotNumber,jdbcType=VARCHAR}, #{inventory,jdbcType=INTEGER}, #{retailPrice,jdbcType=DOUBLE}, 
+      #{supplyPrice,jdbcType=DOUBLE}, #{wholesalePrice,jdbcType=DOUBLE}, #{createUsername,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUsername,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{healthPermit,jdbcType=VARCHAR}, 
+      #{validUntil,jdbcType=DATE}, #{quality,jdbcType=VARCHAR}, #{namePinyin,jdbcType=VARCHAR}, 
+      #{namePinyinFirst,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunup.noend.entity.Commodity">
+    insert into t_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="norm != null">
+        norm,
+      </if>
+      <if test="lotNumber != null">
+        lot_number,
+      </if>
+      <if test="inventory != null">
+        inventory,
+      </if>
+      <if test="retailPrice != null">
+        retail_price,
+      </if>
+      <if test="supplyPrice != null">
+        supply_price,
+      </if>
+      <if test="wholesalePrice != null">
+        wholesale_price,
+      </if>
+      <if test="createUsername != null">
+        create_username,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUsername != null">
+        update_username,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="healthPermit != null">
+        health_permit,
+      </if>
+      <if test="validUntil != null">
+        valid_until,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="namePinyin != null">
+        name_pinyin,
+      </if>
+      <if test="namePinyinFirst != null">
+        name_pinyin_first,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="norm != null">
+        #{norm,jdbcType=VARCHAR},
+      </if>
+      <if test="lotNumber != null">
+        #{lotNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventory != null">
+        #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="retailPrice != null">
+        #{retailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="supplyPrice != null">
+        #{supplyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="wholesalePrice != null">
+        #{wholesalePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createUsername != null">
+        #{createUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUsername != null">
+        #{updateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="healthPermit != null">
+        #{healthPermit,jdbcType=VARCHAR},
+      </if>
+      <if test="validUntil != null">
+        #{validUntil,jdbcType=DATE},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="namePinyin != null">
+        #{namePinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="namePinyinFirst != null">
+        #{namePinyinFirst,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunup.noend.entity.Commodity">
+    update t_commodity
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="norm != null">
+        norm = #{norm,jdbcType=VARCHAR},
+      </if>
+      <if test="lotNumber != null">
+        lot_number = #{lotNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="inventory != null">
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="retailPrice != null">
+        retail_price = #{retailPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="supplyPrice != null">
+        supply_price = #{supplyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="wholesalePrice != null">
+        wholesale_price = #{wholesalePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createUsername != null">
+        create_username = #{createUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUsername != null">
+        update_username = #{updateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="healthPermit != null">
+        health_permit = #{healthPermit,jdbcType=VARCHAR},
+      </if>
+      <if test="validUntil != null">
+        valid_until = #{validUntil,jdbcType=DATE},
+      </if>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="namePinyin != null">
+        name_pinyin = #{namePinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="namePinyinFirst != null">
+        name_pinyin_first = #{namePinyinFirst,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunup.noend.entity.Commodity">
+    update t_commodity
+    set name = #{name,jdbcType=VARCHAR},
+      norm = #{norm,jdbcType=VARCHAR},
+      lot_number = #{lotNumber,jdbcType=VARCHAR},
+      inventory = #{inventory,jdbcType=INTEGER},
+      retail_price = #{retailPrice,jdbcType=DOUBLE},
+      supply_price = #{supplyPrice,jdbcType=DOUBLE},
+      wholesale_price = #{wholesalePrice,jdbcType=DOUBLE},
+      create_username = #{createUsername,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_username = #{updateUsername,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      health_permit = #{healthPermit,jdbcType=VARCHAR},
+      valid_until = #{validUntil,jdbcType=DATE},
+      quality = #{quality,jdbcType=VARCHAR},
+      name_pinyin = #{namePinyin,jdbcType=VARCHAR},
+      name_pinyin_first = #{namePinyinFirst,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunup.noend.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.sunup.noend.entity.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="lump_sum" jdbcType="DOUBLE" property="lumpSum" />
+    <result column="receipt_address" jdbcType="VARCHAR" property="receiptAddress" />
+    <result column="receipt_phone" jdbcType="VARCHAR" property="receiptPhone" />
+    <result column="receipt_name" jdbcType="VARCHAR" property="receiptName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_username" jdbcType="VARCHAR" property="createUsername" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_username" jdbcType="VARCHAR" property="updateUsername" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sender_address" jdbcType="VARCHAR" property="senderAddress" />
+    <result column="sender_phone" jdbcType="VARCHAR" property="senderPhone" />
+    <result column="sender_name" jdbcType="VARCHAR" property="senderName" />
+    <result column="lump_sum_chinese" jdbcType="VARCHAR" property="lumpSumChinese" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_number, lump_sum, receipt_address, receipt_phone, receipt_name, status, 
+    create_username, create_user_id, create_time, update_username, update_user_id, update_time, 
+    remark, sender_address, sender_phone, sender_name, lump_sum_chinese
+  </sql>
+  <!--  select count-->
+  <select id="selectCount" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_order as tor
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where order_number = #{searchValue}
+    </if>
+  </select>
+  <select id="selectCountBySearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+    select count(id) from t_order as tor
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where order_number=#{searchValue}
+    </if>
+  </select>
+  <!--  select page-->
+  <select id="selectPage" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_order
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where order_number = #{searchValue}
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <select id="selectPageBySearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+    select
+    id, order_number, lump_sum, receipt_address, receipt_phone, receipt_name, status,create_time
+    from t_order
+    <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+      where order_number=#{searchValue}
+    </if>
+    order by id desc
+    limit #{start},#{length}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sunup.noend.entity.Order">
+    insert into t_order (id, order_number, lump_sum, 
+      receipt_address, receipt_phone, receipt_name, 
+      status, create_username, create_user_id, 
+      create_time, update_username, update_user_id, 
+      update_time, remark, sender_address, 
+      sender_phone, sender_name, lump_sum_chinese
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{lumpSum,jdbcType=DOUBLE}, 
+      #{receiptAddress,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR}, #{receiptName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createUsername,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUsername,jdbcType=VARCHAR}, #{updateUserId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{senderAddress,jdbcType=VARCHAR}, 
+      #{senderPhone,jdbcType=VARCHAR}, #{senderName,jdbcType=VARCHAR}, #{lumpSumChinese,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunup.noend.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="lumpSum != null">
+        lump_sum,
+      </if>
+      <if test="receiptAddress != null">
+        receipt_address,
+      </if>
+      <if test="receiptPhone != null">
+        receipt_phone,
+      </if>
+      <if test="receiptName != null">
+        receipt_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUsername != null">
+        create_username,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUsername != null">
+        update_username,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="senderAddress != null">
+        sender_address,
+      </if>
+      <if test="senderPhone != null">
+        sender_phone,
+      </if>
+      <if test="senderName != null">
+        sender_name,
+      </if>
+      <if test="lumpSumChinese != null">
+        lump_sum_chinese,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lumpSum != null">
+        #{lumpSum,jdbcType=DOUBLE},
+      </if>
+      <if test="receiptAddress != null">
+        #{receiptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPhone != null">
+        #{receiptPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptName != null">
+        #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUsername != null">
+        #{createUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUsername != null">
+        #{updateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="senderAddress != null">
+        #{senderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="senderPhone != null">
+        #{senderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null">
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="lumpSumChinese != null">
+        #{lumpSumChinese,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunup.noend.entity.Order">
+    update t_order
+    <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lumpSum != null">
+        lump_sum = #{lumpSum,jdbcType=DOUBLE},
+      </if>
+      <if test="receiptAddress != null">
+        receipt_address = #{receiptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPhone != null">
+        receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptName != null">
+        receipt_name = #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUsername != null">
+        create_username = #{createUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUsername != null">
+        update_username = #{updateUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="senderAddress != null">
+        sender_address = #{senderAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="senderPhone != null">
+        sender_phone = #{senderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="senderName != null">
+        sender_name = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="lumpSumChinese != null">
+        lump_sum_chinese = #{lumpSumChinese,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunup.noend.entity.Order">
+    update t_order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      lump_sum = #{lumpSum,jdbcType=DOUBLE},
+      receipt_address = #{receiptAddress,jdbcType=VARCHAR},
+      receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
+      receipt_name = #{receiptName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_username = #{createUsername,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_username = #{updateUsername,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      sender_address = #{senderAddress,jdbcType=VARCHAR},
+      sender_phone = #{senderPhone,jdbcType=VARCHAR},
+      sender_name = #{senderName,jdbcType=VARCHAR},
+      lump_sum_chinese = #{lumpSumChinese,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

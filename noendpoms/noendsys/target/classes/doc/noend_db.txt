@@ -1,0 +1,205 @@
+t_user                  //用户
+	id
+	account_number      //用户账号
+	password            //用户密码
+	username            //用户名
+	type                //用户类型  1系统用户 2普通用户
+    email               //用户邮箱
+    phone               //用户手机号码
+    sex                 //用户性别 0未知 1男 2女
+    avatar_url          //用户头像路径
+    salt                //盐加密
+    status              //账号状态 0正常 1停用
+    login_ip            //登录ip
+    login_time          //登录时间
+	role_name           //角色名称
+	role_id             //角色id
+	create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+t_log                   //日志
+	id
+	type                //0系统 1操作 2登录 3系统异常
+	business_type       //业务类型 0其他 1新增 2修改 3删除
+	method              //方法名
+	request_method      //请求方式
+    request_url         //请求地址
+    request_param       //请求参数
+    return_result       //返回结果
+    host_ip             //主机ip
+    operating_address   //操作地点
+    status              //操作状态 0正常 1异常
+    error_msg           //错误消息
+	title               //标题
+	time                //时间
+	user_id             //用户id
+
+t_role                  //角色
+    id
+    name                //角色名称
+    key                 //角色权限字符串
+    show_order          //角色显示顺序
+    status              //角色状态 0正常 1停用
+	create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+t_role_user             //角色用户
+    id
+    role_id
+    user_id
+t_menu                  //菜单
+    id
+    name                //菜单名
+    parent_id           //父菜单id
+    show_order          //菜单显示顺序
+    url                 //请求地址
+    target              //打开方式 0页签 1新窗口
+    type                //菜单类型 0目录 1菜单 2按钮
+    status              //菜单状态 0显示 1隐藏
+    auth                //权限标识
+    icon                //菜单图标
+	create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+
+t_menu_role             //菜单角色
+    id
+    menu_id
+    role_id
+
+t_commodity             //商品
+    id
+    name                //商品名称
+    name_pinyin         //拼音
+    name_pinyin_first   //拼音首字母
+    amount              //数量 0
+    norm                //规格 /件/100盒/
+    unit                //单位
+    lot_number          //批号
+    health_permit       //卫生许可证
+    valid_until         //有效期至
+    quality             //质量
+    inventory           //库存 0
+    retail_price        //零售价
+    supply_price        //供货价
+    wholesale_price     //批发价
+    create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+t_company               //企业
+    id
+    name                //企业名称（营业执照上的名称）
+    name_pinyin         //拼音全小写字母
+    name_pinyin_first   //拼音首字母
+    address             //企业地址（营业执照上的地址）
+    address_pinyin      //拼音全小写字母
+    address_pinyin_first//拼音首字母
+    phone               //联系电话
+    landline            //座机
+    uniform_credit_code //企业统一信用代码
+    logo                //企业logo（base64码）
+    related_pictures    //企业相关图片(base64码 多个图片以英文逗号隔开)
+    create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+t_order                 //订单
+    id
+    order_number        //订单编号
+    lump_sum              //金额
+    receipt_address     //收货人地址
+    receipt_phone       //收货人电话
+    receipt_name        //收货人姓名
+    sender_address      //发货人地址
+    sender_phone        //发货人电话
+    sender_name         //发货人姓名
+    status              //订单状态 0已开票 1待出库 2确认派件 3派件中 4已收款 5完成
+    create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+t_outbound_order        //出库单
+    id
+    order_number        //订单编号
+    company_id          //企业id
+    company_name        //企业名称
+    commodity_id        //商品id
+    commodity_name      //商品名称
+    commodity_norm      //商品规格
+    commodity_lot_number//商品批号
+    amount              //数量
+    unit_price          //单价
+    status              //0未结算 1已经算未发货 2未结算已发货
+    create_username     //创建者用户名
+    create_user_id      //创建者用户id
+    create_time         //创建时间
+    update_username     //更新者用户名
+    update_user_id      //更新者用户id
+    update_time         //更新时间
+    remark              //备注
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

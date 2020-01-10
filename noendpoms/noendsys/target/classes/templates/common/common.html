@@ -1,0 +1,206 @@
+<!--通用head-->
+<head th:fragment="head(title,cssPaths)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
+    <title th:text="${title}"></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/cerulean/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/colors/default-dark.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:each="cssPath,status:${#strings.setSplit(cssPaths,',')}" th:href="@{${cssPath}}"/>
+    <style>
+        /*缩放显示效果*/
+        body {
+            zoom: 0.7;
+        }
+
+        /*body{*/
+        /*    transform: scale(0.8);*/
+        /*}*/
+    </style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!--通用js-->
+<div th:fragment="js(scriptPaths)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.8.1/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/static/js/waves.js"></script>
+    <script src="/static/js/sidebarmenu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+    <script src="/static/js/custom.min.js"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            //时间格式化问题
+            Date.prototype.Format = function (fmt) {
+                var o = {
+                    "M+": this.getMonth() + 1, //月份
+                    "d+": this.getDate(), //日
+                    "H+": this.getHours(), //小时
+                    "m+": this.getMinutes(), //分
+                    "s+": this.getSeconds(), //秒
+                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                    "S": this.getMilliseconds() //毫秒
+                };
+                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o)
+                    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                return fmt;
+            }
+            let path = /*[[${path}]]*/ '';
+            if (path != null && path.indexOf('sales') != -1) {
+                $(".sales").addClass('active');
+            }
+        })
+        /*]]>*/
+    </script>
+    <!--    页面js导入 -->
+    <script th:each="scriptPath,status:${#strings.setSplit(scriptPaths,',')}" th:src="@{${scriptPath}}" ></script>
+
+<!--    <script src="/static/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>-->
+</div>
+<header class="topbar" th:fragment="topbar">
+    <nav class="navbar top-navbar navbar-expand-md navbar-light">
+        <!-- ============================================================== -->
+        <!-- Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-header" style="text-align: center;">
+            <a class="navbar-brand" href="/index">
+                <!-- Logo icon --><b>Noend
+                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                <!-- Dark Logo icon -->
+                <!--                <img src="/static/assets/images/logo-icon.png" alt="homepage" class="dark-logo"/>-->
+                <!-- Light Logo icon -->
+                <!--                <img src="/static/assets/images/logo-light-icon.png" alt="homepage" class="light-logo"/>-->
+            </b>
+                <!--End Logo icon -->
+                <!-- Logo text --><span>
+                         <!-- dark Logo text -->
+                <!--                         <img src="/static/assets/images/logo-text.png" alt="homepage" class="dark-logo"/>-->
+                <!-- Light Logo text -->
+                <!--                         <img src="/static/assets/images/logo-light-text.png" class="light-logo" alt="homepage"/>-->
+            </span> </a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse">
+            <!-- ============================================================== -->
+            <!-- toggle and nav items -->
+            <!-- ============================================================== -->
+            <ul class="navbar-nav mr-auto">
+                <!-- This is  -->
+                <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i
+                        class="zmdi zmdi-menu zmdi-hc-lg"></i></a></li>
+                <li class="nav-item"><a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
+                        class="zmdi zmdi-menu zmdi-hc-lg"></i></a></li>
+                <li class="nav-item hidden-sm-down"></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!--通用菜单-->
+<aside class="left-sidebar" th:fragment="left-sidebar">
+    <div class="scroll-sidebar">
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile"><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img
+                        src="/static/assets/images/users/profile.png" alt="user"/><span class="hide-menu" th:text="${session.success_user}">明我
+                </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="#">个人中心 </a></li>
+                        <li><a href="#">我的余额</a></li>
+                        <li><a href="#">收件箱</a></li>
+                        <li><a href="#">账号设置</a></li>
+                        <li><a href="#">退出</a></li>
+                    </ul>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="sales"><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true"><i class="zmdi zmdi-widgets zmdi-hc-fw"></i><span
+                        class="hide-menu">销售管理 <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="/sales/commodity/list">商品管理 </a></li>
+                        <li><a href="/sales/company/list">企业管理 </a></li>
+                        <li><a href="/sales/outbound/add">出库管理 </a></li>
+                        <li><a href="/sales/order/list">订单管理 </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!--通用右边-->
+<div class="right-sidebar" th:fragment="right-sidebar">
+    <div class="slimscrollright">
+        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span></div>
+        <div class="r-panel-body">
+            <ul id="themecolors" class="m-t-20">
+                <li><b>With Light sidebar</b></li>
+                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
+                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
+                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
+                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme">4</a></li>
+                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
+                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
+                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme working">7</a></li>
+                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
+                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
+                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
+                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
+                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
+            </ul>
+            <ul class="m-t-20 chatonline">
+                <li><b>Chat option</b></li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/1.jpg" alt="user-img" class="img-circle">
+                        <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small
+                            class="text-warning">Away</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small
+                            class="text-danger">Busy</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/4.jpg" alt="user-img" class="img-circle">
+                        <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/5.jpg" alt="user-img" class="img-circle">
+                        <span>Govinda Star <small class="text-success">online</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/6.jpg" alt="user-img" class="img-circle">
+                        <span>John Abraham<small class="text-success">online</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/7.jpg" alt="user-img" class="img-circle">
+                        <span>Hritik Roshan<small class="text-success">online</small></span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="/static/assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small
+                            class="text-success">online</small></span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

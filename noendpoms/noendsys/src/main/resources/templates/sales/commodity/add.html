@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: head('Noend','')">
+</head>
+<body class="fix-header card-no-border fix-sidebar">
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Pro</p>
+    </div>
+</div>
+<div id="main-wrapper">
+    <header class="topbar" th:replace="common/common :: topbar">
+    </header>
+    <aside class="left-sidebar" th:replace="common/common :: left-sidebar">
+    </aside>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">商品管理</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+                        <li class="breadcrumb-item">销售管理</li>
+                        <li class="breadcrumb-item active">商品管理</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                            class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-info">
+                            <h4 class="m-b-0 text-white">新增商品</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#">
+                                <div class="form-body">
+                                    <h3 class="card-title">商品信息</h3>
+                                    <hr>
+                                    <div class="row p-t-20">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">商品名称</label>
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">商品规格</label>
+                                                <input type="text" id="norm" name="norm" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">商品批号</label>
+                                                <input type="text" id="lotNumber" name="lotNumber" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">库存</label>
+                                                <input type="text" id="inventory" name="inventory" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">零售价格</label>
+                                                <input type="text" id="retailPrice" name="retailPrice" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">供货价格</label>
+                                                <input type="text" id="supplyPrice" name="supplyPrice" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <div class="row p-t-20">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">批发价格</label>
+                                                <input type="text" id="wholesalePrice" name="wholesalePrice" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">单位</label>
+                                                <input type="text" id="unit" name="unit" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">卫生许可证</label>
+                                                <input type="text" id="healthPermit" name="healthPermit" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">有效期至</label>
+                                                <input type="date" id="validUntil" name="validUntil" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">质量</label>
+                                                <input type="text" id="quality" name="quality" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-2">
+                                            <div class="form-group has-success">
+                                                <label class="control-label">商品类型</label>
+                                                <select class="form-control custom-select">
+                                                    <option value="">药品</option>
+                                                    <option value="">保健品</option>
+                                                </select>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                    </div>
+                                    <div class="row p-t-20">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label">备注</label>
+                                                <input type="text" id="remark" name="remark" class="form-control" placeholder="">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <div class="row p-t-20">
+
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <!--/row-->
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="button" class="btn btn-success submit"><i class="fa fa-check"></i> 提交</button>
+                                        <button type="button" class="btn btn-inverse">取消</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Row -->
+        </div>
+        <!-- End Container fluid  -->
+    </div>
+</div>
+<div th:replace="common/common :: js('')"></div>
+<script>
+    $(function () {
+        $(".submit").click(function () {
+            $.ajax({
+                url: "/sales/commodity/add",
+                dataType: "json",
+                type: "post",
+                data: {
+                    "name": $("#name").val(),
+                    "norm": $("#norm").val(),
+                    "lotNumber": $("#lotNumber").val(),
+                    "inventory": $("#inventory").val(),
+                    "retailPrice": $("#retailPrice").val(),
+                    "supplyPrice": $("#supplyPrice").val(),
+                    "wholesalePrice": $("#wholesalePrice").val(),
+                    "unit": $("#unit").val(),
+                    "healthPermit": $("#healthPermit").val(),
+                    "validUntil": new Date($("#validUntil").val()),
+                    "quality": $("#quality").val(),
+                    "remark": $("#remark").val(),
+                },
+                success: function (result) {
+                    if (result.code == 1) {
+                        alert("新增成功！");
+                        window.location.href = '/sales/commodity/list';
+                    }
+                }
+            })
+        })
+    })
+</script>
+</body>
+
+</html>

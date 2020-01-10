@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: head('Noend','https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css')">
+</head>
+<body class="fix-header card-no-border fix-sidebar">
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Pro</p>
+    </div>
+</div>
+<div id="main-wrapper">
+
+    <header class="topbar" th:replace="common/common :: topbar">
+    </header>
+    <aside class="left-sidebar" th:replace="common/common :: left-sidebar">
+    </aside>
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">商品出库</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+                        <li class="breadcrumb-item">销售管理</li>
+                        <li class="breadcrumb-item active">出库管理</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                            class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="data-from">
+                                <h4 class="card-title">企业</h4>
+                                <div class="row">
+                                    <div class="col-sm-3 nopadding">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" id="companyId" name="companyId">
+                                            <input type="text" class="form-control" id="companyName" name="companyName" value="" placeholder="企业名称"
+                                                   data-toggle="modal" data-target=".bd-example-modal-xl" required readonly>
+                                            <div class="modal fade bd-example-modal-xl" data-backdrop="static" tabindex="-1" role="dialog"
+                                                 aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">选择企业</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive m-t-0">
+                                                                <table id="datatable"
+                                                                       class="display nowrap table table-hover table-striped table-bordered"
+                                                                       cellspacing="0" width="100%">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>id</th>
+                                                                        <th>企业名称</th>
+                                                                        <th>地址</th>
+                                                                        <th>选择</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="card-title">商品</h4>
+                                <div id="education_fields"></div>
+                                <div class="row">
+                                    <div class="col-sm-3 nopadding">
+                                        <div class="form-group ">
+                                            <input type="hidden" name="commodityId">
+                                            <input type="text" class="form-control commodityName" name="commodityName" value=""
+                                                   placeholder="商品名称" required
+                                                   data-toggle="modal" data-target=".modal2" onclick="clickCommodityName(this)" readonly>
+                                            <div class="modal fade bd-example-modal-xl modal2" data-backdrop="static" tabindex="-1" role="dialog"
+                                                 aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel2">选择企业</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive m-t-0">
+                                                                <table id="datatable2"
+                                                                       class="display nowrap table table-hover table-striped table-bordered"
+                                                                       cellspacing="0"
+                                                                       width="100%">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>id</th>
+                                                                        <th>名称</th>
+                                                                        <th>规格</th>
+                                                                        <th>批号</th>
+                                                                        <th>库存</th>
+                                                                        <th>供货价</th>
+                                                                        <th>零售价</th>
+                                                                        <th>批发价</th>
+                                                                        <th>操作</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 nopadding">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="lotNumber" value="" placeholder="批号" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 nopadding">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="norm" value="" placeholder="规格" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 nopadding">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="amount" value="" placeholder="数量" required maxlength="10">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 nopadding">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="supplyPrice" name="unitPrice" value="" placeholder="单价" maxlength='10'
+                                                       required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-success" type="button" onclick="education_fields();"><i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success" id="submit-outbound-form-btn">提交订单</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="common/common :: js('https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js,'
+        +'/static/assets/plugins/dff/dff.js,https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js,'
+        +'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js,'
+        +'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/localization/messages_zh.min.js')"></div>
+
+<script type="text/javascript">
+    var clickCommodityNameInput = null;
+    $(function () {
+        $(".modal").css("zoom", 0.9);
+
+        //企业名称检索
+        $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            "ajax": {
+                "url": "/sales/company/list",
+                "type": "post",
+                "data": function (data) {
+
+                }
+            }, "columns": [
+                {"data": 'id'},
+                {"data": 'name'},
+                {"data": 'address'},
+            ],
+            "columnDefs": [{
+                "targets": 3,
+                "render": function (data, type, row, meta) {
+                    return "<button class='btn btn-success zmdi zmdi-check zmdi-hc-lg' onclick='selectCompanyName(" + row.id +
+                        ",\"" + row.name + "\")'  data-dismiss='modal'></button>";
+                }
+            }],
+            // 国际化
+            language: {
+                "sProcessing": "加载中...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+        //商品名称检索
+        $('#datatable2').DataTable({
+            processing: true,
+            serverSide: true,
+            "ajax": {
+                "url": "/sales/commodity/list",
+                "type": "post",
+                "data": function (data) {
+
+                }
+            }, "columns": [
+                {"data": 'id'},
+                {"data": 'name'},
+                {"data": 'norm'},
+                {"data": 'lotNumber'},
+                {"data": 'inventory'},
+                {"data": 'supplyPrice'},
+                {"data": 'retailPrice'},
+                {"data": 'wholesalePrice'},
+            ],
+            "columnDefs": [{
+                "targets": 8,
+                "render": function (data, type, row, meta) {
+                    return "<button class='btn btn-success zmdi zmdi-check zmdi-hc-lg' onclick='selectCommodityName(" + JSON.stringify(row).replace(/"/g, '&quot;') +
+                        ")'  data-dismiss='modal'></button>";
+                }
+            }],
+            // 国际化
+            language: {
+                "sProcessing": "加载中...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+        $("#data-from").on("submit", function () {
+            return false;
+        });
+        $("#data-from").validate({
+            rules: {},
+            submitHandler: function (from) {
+                let f = $(from)[0];
+                let len = $(f)[0].commodityId.length;
+                let companyName = $("#companyName").val();
+                let companyId = $("#companyId").val();
+                let commodityNames = "";
+                let commodityIds = "";
+                let norms = "";
+                let lotNumbers = "";
+                let amounts = "";
+                let unitPrices = "";
+                if (len > 0) {
+                    for (let i = 0; i < len; i++) {
+                        commodityNames += f.commodityName[i].value + ",";
+                        commodityIds += f.commodityId[i].value + ",";
+                        norms += f.norm[i].value + ",";
+                        lotNumbers += f.lotNumber[i].value + ",";
+                        amounts += f.amount[i].value + ",";
+                        unitPrices += f.unitPrice[i].value + ",";
+                    }
+                } else if (typeof len == "undefined") {
+                    commodityNames = f.commodityName.value;
+                    commodityIds = f.commodityId.value;
+                    norms = f.norm.value;
+                    lotNumbers = f.lotNumber.value;
+                    amounts = f.amount.value;
+                    unitPrices = f.unitPrice.value;
+                }
+                $.ajax({
+                    url: "/sales/outbound/add",
+                    type: "post",
+                    data: {
+                        "companyName": companyName,
+                        "companyId": companyId,
+                        "commodityNames": commodityNames,
+                        "commodityIds": commodityIds,
+                        "norms": norms,
+                        "lotNumbers": lotNumbers,
+                        "amounts": amounts,
+                        "unitPrices": unitPrices,
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.code == 1) {
+                            window.location.href = "[[@{/sales/order/list?msg='提交成功！'}]]";
+                        }
+                    }
+                });
+
+            }
+        });
+
+    });
+
+    function clickCommodityName(obj) {
+        clickCommodityNameInput = obj;
+    }
+
+    function selectCompanyName(id, name) {
+        $("#companyName").val(name);
+        $("#companyId").val(id);
+    }
+
+    //dff.js 这个下面是html追加
+    function selectCommodityName(row) {
+        clickCommodityNameInput.value = row.name;
+        $(clickCommodityNameInput).prev()[0].value = row.id;
+        let ps = $(clickCommodityNameInput).parent().parent().siblings();
+        $(ps[0].firstElementChild.firstElementChild)[0].value = row.lotNumber;
+        $(ps[1].firstElementChild.firstElementChild)[0].value = row.norm;
+    }
+</script>
+</body>
+
+</html>

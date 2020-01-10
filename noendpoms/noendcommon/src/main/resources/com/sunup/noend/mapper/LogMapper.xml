@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunup.noend.mapper.LogMapper">
+  <resultMap id="BaseResultMap" type="com.sunup.noend.entity.Log">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="business_type" jdbcType="INTEGER" property="businessType" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
+    <result column="request_url" jdbcType="VARCHAR" property="requestUrl" />
+    <result column="request_param" jdbcType="VARCHAR" property="requestParam" />
+    <result column="return_result" jdbcType="VARCHAR" property="returnResult" />
+    <result column="host_ip" jdbcType="VARCHAR" property="hostIp" />
+    <result column="operating_address" jdbcType="VARCHAR" property="operatingAddress" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type, business_type, method, request_method, request_url, request_param, return_result, 
+    host_ip, operating_address, status, error_msg, title, time, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sunup.noend.entity.Log">
+    insert into t_log (id, type, business_type, 
+      method, request_method, request_url, 
+      request_param, return_result, host_ip, 
+      operating_address, status, error_msg, 
+      title, time, user_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{businessType,jdbcType=INTEGER}, 
+      #{method,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestUrl,jdbcType=VARCHAR}, 
+      #{requestParam,jdbcType=VARCHAR}, #{returnResult,jdbcType=VARCHAR}, #{hostIp,jdbcType=VARCHAR}, 
+      #{operatingAddress,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{errorMsg,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sunup.noend.entity.Log">
+    insert into t_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="businessType != null">
+        business_type,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="requestMethod != null">
+        request_method,
+      </if>
+      <if test="requestUrl != null">
+        request_url,
+      </if>
+      <if test="requestParam != null">
+        request_param,
+      </if>
+      <if test="returnResult != null">
+        return_result,
+      </if>
+      <if test="hostIp != null">
+        host_ip,
+      </if>
+      <if test="operatingAddress != null">
+        operating_address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="errorMsg != null">
+        error_msg,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUrl != null">
+        #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null">
+        #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="returnResult != null">
+        #{returnResult,jdbcType=VARCHAR},
+      </if>
+      <if test="hostIp != null">
+        #{hostIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingAddress != null">
+        #{operatingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sunup.noend.entity.Log">
+    update t_log
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="businessType != null">
+        business_type = #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null">
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUrl != null">
+        request_url = #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null">
+        request_param = #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="returnResult != null">
+        return_result = #{returnResult,jdbcType=VARCHAR},
+      </if>
+      <if test="hostIp != null">
+        host_ip = #{hostIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operatingAddress != null">
+        operating_address = #{operatingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        error_msg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sunup.noend.entity.Log">
+    update t_log
+    set type = #{type,jdbcType=INTEGER},
+      business_type = #{businessType,jdbcType=INTEGER},
+      method = #{method,jdbcType=VARCHAR},
+      request_method = #{requestMethod,jdbcType=VARCHAR},
+      request_url = #{requestUrl,jdbcType=VARCHAR},
+      request_param = #{requestParam,jdbcType=VARCHAR},
+      return_result = #{returnResult,jdbcType=VARCHAR},
+      host_ip = #{hostIp,jdbcType=VARCHAR},
+      operating_address = #{operatingAddress,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      error_msg = #{errorMsg,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunup.noend.mapper.CompanyMapper">
+    <resultMap id="BaseResultMap" type="com.sunup.noend.entity.Company">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="name_pinyin" jdbcType="VARCHAR" property="namePinyin"/>
+        <result column="name_pinyin_first" jdbcType="VARCHAR" property="namePinyinFirst"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="address_pinyin" jdbcType="VARCHAR" property="addressPinyin"/>
+        <result column="address_pinyin_first" jdbcType="VARCHAR" property="addressPinyinFirst"/>
+        <result column="uniform_credit_code" jdbcType="VARCHAR" property="uniformCreditCode"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="related_pictures" jdbcType="VARCHAR" property="relatedPictures"/>
+        <result column="create_username" jdbcType="VARCHAR" property="createUsername"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_username" jdbcType="VARCHAR" property="updateUsername"/>
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="landline" jdbcType="VARCHAR" property="landline"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, name_pinyin, name_pinyin_first, address, address_pinyin, address_pinyin_first, 
+    uniform_credit_code, logo, related_pictures, create_username, create_user_id, create_time, 
+    update_username, update_user_id, update_time, remark, phone, landline
+  </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select id,name,address from t_company
+    </select>
+    <select id="selectByName" resultType="java.lang.Integer">
+        select count(id) from t_company where name=#{name}
+    </select>
+    <!--  page-->
+    <select id="selectCount" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+        select count(id) from t_company as tc
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where locate(#{searchValue},name)>0 or locate(#{searchValue},address)>0
+        </if>
+    </select>
+    <select id="selectCountBySearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+        select count(id) from t_company as tc
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where name=#{searchValue} or name_pinyin=#{searchValue} or name_pinyin_first=#{searchValue} or address_pinyin=#{searchValue}
+            or address_pinyin_first=#{searchValue}
+        </if>
+    </select>
+    <select id="selectCountByPinyinSearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+        select count(id) from t_company as tc
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where match(name_pinyin,address_pinyin)against(concat(#{searchValue},'*') in boolean mode)
+        </if>
+    </select>
+    <select id="selectCountByPinyinFirstSearch" parameterType="com.sunup.noend.pojo.Page" resultType="java.lang.Integer">
+        select count(id) from t_company as tc
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where match(name_pinyin_first,address_pinyin_first)against(concat(#{searchValue},'*')in boolean mode)
+        </if>
+    </select>
+    <select id="selectPageBySearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where name=#{searchValue} or name_pinyin=#{searchValue} or name_pinyin_first=#{searchValue} or address_pinyin=#{searchValue}
+            or address_pinyin_first=#{searchValue}
+        </if>
+        order by id desc
+        limit #{start},#{length}
+    </select>
+    <select id="selectPageByPinyinSearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where match(name_pinyin,address_pinyin)against(concat(#{searchValue},'*') in boolean mode)
+        </if>
+        order by id desc
+        limit #{start},#{length}
+    </select>
+    <select id="selectPageByPinyinFirstSearch" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where match(name_pinyin_first,address_pinyin_first)against(concat(#{searchValue},'*')in boolean mode)
+        </if>
+        order by id desc
+        limit #{start},#{length}
+    </select>
+    <select id="selectPage" parameterType="com.sunup.noend.pojo.Page" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        <if test="searchValue!=null and !searchValue.trim().isEmpty()">
+            where locate(#{searchValue},name)>0 or locate(#{searchValue},address)>0
+        </if>
+        order by id desc
+        limit #{start},#{length}
+    </select>
+    <!--  page-->
+    <select id="selectByNamePinyinFirstOrAddressPinyinFirst" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        where match(name_pinyin_first,address_pinyin_first)against(concat(#{searchValue},'*')in boolean mode)
+    </select>
+    <select id="selectByNameOrAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        where locate(#{serchValue},name)>0 or locate(#{serchValue},address)>0
+    </select>
+    <select id="selectByNamePinyinOrAddressPinyin" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        id, name, address,uniform_credit_code,phone, landline
+        from t_company
+        where match(name_pinyin,address_pinyin)against(concat(#{searchValue},'*') in boolean mode)
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_company
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.sunup.noend.entity.Company">
+    insert into t_company (id, name, name_pinyin, 
+      name_pinyin_first, address, address_pinyin, 
+      address_pinyin_first, uniform_credit_code, 
+      logo, related_pictures, create_username, 
+      create_user_id, create_time, update_username, 
+      update_user_id, update_time, remark, 
+      phone, landline)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{namePinyin,jdbcType=VARCHAR}, 
+      #{namePinyinFirst,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{addressPinyin,jdbcType=VARCHAR}, 
+      #{addressPinyinFirst,jdbcType=VARCHAR}, #{uniformCreditCode,jdbcType=VARCHAR}, 
+      #{logo,jdbcType=VARCHAR}, #{relatedPictures,jdbcType=VARCHAR}, #{createUsername,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUsername,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{landline,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.sunup.noend.entity.Company">
+        insert into t_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="namePinyin != null">
+                name_pinyin,
+            </if>
+            <if test="namePinyinFirst != null">
+                name_pinyin_first,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="addressPinyin != null">
+                address_pinyin,
+            </if>
+            <if test="addressPinyinFirst != null">
+                address_pinyin_first,
+            </if>
+            <if test="uniformCreditCode != null">
+                uniform_credit_code,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="relatedPictures != null">
+                related_pictures,
+            </if>
+            <if test="createUsername != null">
+                create_username,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUsername != null">
+                update_username,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="landline != null">
+                landline,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="namePinyin != null">
+                #{namePinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="namePinyinFirst != null">
+                #{namePinyinFirst,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPinyin != null">
+                #{addressPinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPinyinFirst != null">
+                #{addressPinyinFirst,jdbcType=VARCHAR},
+            </if>
+            <if test="uniformCreditCode != null">
+                #{uniformCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="relatedPictures != null">
+                #{relatedPictures,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null">
+                #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUsername != null">
+                #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="landline != null">
+                #{landline,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunup.noend.entity.Company">
+        update t_company
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="namePinyin != null">
+                name_pinyin = #{namePinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="namePinyinFirst != null">
+                name_pinyin_first = #{namePinyinFirst,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPinyin != null">
+                address_pinyin = #{addressPinyin,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPinyinFirst != null">
+                address_pinyin_first = #{addressPinyinFirst,jdbcType=VARCHAR},
+            </if>
+            <if test="uniformCreditCode != null">
+                uniform_credit_code = #{uniformCreditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="relatedPictures != null">
+                related_pictures = #{relatedPictures,jdbcType=VARCHAR},
+            </if>
+            <if test="createUsername != null">
+                create_username = #{createUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUsername != null">
+                update_username = #{updateUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="landline != null">
+                landline = #{landline,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sunup.noend.entity.Company">
+    update t_company
+    set name = #{name,jdbcType=VARCHAR},
+      name_pinyin = #{namePinyin,jdbcType=VARCHAR},
+      name_pinyin_first = #{namePinyinFirst,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      address_pinyin = #{addressPinyin,jdbcType=VARCHAR},
+      address_pinyin_first = #{addressPinyinFirst,jdbcType=VARCHAR},
+      uniform_credit_code = #{uniformCreditCode,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      related_pictures = #{relatedPictures,jdbcType=VARCHAR},
+      create_username = #{createUsername,jdbcType=VARCHAR},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_username = #{updateUsername,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      landline = #{landline,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

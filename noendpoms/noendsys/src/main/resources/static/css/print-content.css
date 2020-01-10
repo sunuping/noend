@@ -1,0 +1,22 @@
+#print-content #print-table{
+}
+#print-content #print-table tr{
+    height: 20px;
+}
+#print-content #print-table tr,td{
+    height: 20px;
+    line-height: 25px;
+}
+.tdr{
+    text-align: right;
+}
+.tdl{
+    text-align: left;
+}
+.tdc{
+    text-align: center;
+    margin: 0px auto;
+}
+.tdbn{
+    border: 0px;
+}

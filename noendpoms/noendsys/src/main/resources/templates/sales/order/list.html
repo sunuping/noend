@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: head('Noend','https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css')">
+</head>
+
+<body class="fix-header card-no-border fix-sidebar">
+
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Pro</p>
+    </div>
+</div>
+
+<div id="main-wrapper">
+
+    <header class="topbar" th:replace="common/common :: topbar">
+    </header>
+
+    <aside class="left-sidebar" th:replace="common/common :: left-sidebar">
+
+    </aside>
+
+    <div class="page-wrapper">
+
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">订单管理</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">主页</a></li>
+                        <li class="breadcrumb-item">销售管理</li>
+                        <li class="breadcrumb-item active">订单管理</li>
+                    </ol>
+                </div>
+                <div>
+                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+                            class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <!--                            <h4 class="card-title">Data Export</h4>-->
+                            <!--                            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
+                            <!--                            <button class="btn btn-primary add">商品出库</button>-->
+                            <div class="table-responsive m-t-0">
+                                <table id="datatable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>订单编号</th>
+                                        <th>总金额</th>
+                                        <th>收货人昵称</th>
+                                        <th>收货人地址</th>
+                                        <th>收货人电话</th>
+                                        <th>订单状态</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div th:replace="common/common :: js('https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js')"></div>
+<!--<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.2.2/jszip.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/pdfmake.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.62/vfs_fonts.js"></script>-->
+<!--<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>-->
+<script>
+    $(function () {
+        var datatable = $('#datatable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            pagingType: "full_numbers",
+            processing: true,
+            serverSide: true,
+            "ajax": {
+                "url": "/sales/order/list",
+                "type": "post",
+                "data": function (data) {
+
+                }
+            }, "columns": [
+                {"data": 'id'},
+                {"data": 'orderNumber'},
+                {"data": 'lumpSum'},
+                {"data": 'receiptName'},
+                {"data": 'receiptAddress'},
+                {"data": 'receiptPhone'},
+                {
+                    "data": 'status',
+                    "render": function (data) {
+                        return data == 0 ? "已开票" : data == 1 ? "待出库" : data == 2 ? "确认派件" : data == 3 ? "派件中" : data == 4 ? "已收款" : data == 5 ? "已完成" : "";
+                    }
+                },
+                {
+                    "data": 'createTime',
+                    "render": function (data) {
+                        return new Date(data).Format('yyyy-MM-dd HH:mm:ss');
+                    }
+                },
+            ],
+            "columnDefs": [{
+                "targets": 8,
+                "render": function (data, type, row, meta) {
+                    return "<button class='btn btn-danger' onclick='noenddel(" + row.id +
+                        ")'>删除</button> <button class='btn btn-info' onclick='noendmodify(" + row.id +
+                        ")'>修改</button> <button class='btn btn-primary' onclick='noendprint(" + row.id + ")'>打印</button>";
+                }
+            }],
+            // 国际化
+            language: {
+                "sProcessing": "加载中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
+
+        $('.add').click(function () {
+            window.location.href = "/sales/order/add";
+        });
+
+    });
+
+    function noenddel(id) {
+        $.ajax({
+            url: "/sales/order/del",
+            dataType: "json",
+            type: "post",
+            data: {
+                "id": id
+            },
+            success: function (result) {
+                //获取table对象 异步重新加载数据
+                let datatable = $("#datatable").DataTable();
+                datatable.ajax.reload();
+            }
+        });
+    }
+
+    function noendmodify(id) {
+        window.location.href = "/sales/order/modify?id=" + id;
+    }
+
+    function noendprint(id){
+        window.location.href="/sales/order/print?id="+id;
+    }
+
+    $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+</script>
+<!-- ============================================================== -->
+<!-- Style switcher -->
+<!-- ============================================================== -->
+</body>
+
+</html>

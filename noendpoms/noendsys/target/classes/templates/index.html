@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/common :: head('Noend','')"></head>
+<body class="fix-header fix-sidebar card-no-border">
+<div class="preloader">
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Admin Pro</p>
+    </div>
+</div>
+<div id="main-wrapper">
+    <header class="topbar" th:replace="common/common :: topbar">
+    </header>
+    <aside class="left-sidebar" th:replace="common/common :: left-sidebar">
+    </aside>
+    <div class="page-wrapper">
+        <div class="container-fluid r-aside">
+        </div>
+    </div>
+</div>
+<div th:replace="common/common :: js('')"></div>
+<!--<script src="https://cdn.bootcss.com/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/chartist/0.11.4/chartist.min.js"></script>-->
+<!--<script src="/static/js/dashboard1.js"></script>-->
+<!--<script src="/static/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>-->
+</body>
+</html>
