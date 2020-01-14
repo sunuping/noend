@@ -31,8 +31,8 @@ public class PingyinConver {
      * @throws BadHanyuPinyinOutputFormatCombination
      */
     public static final String conver(final String str, boolean firstLetter) throws BadHanyuPinyinOutputFormatCombination {
-        if (str.isEmpty()) {
-            return "";
+        if (str == null || str.isEmpty()) {
+            return null;
         }
 
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
@@ -55,7 +55,7 @@ public class PingyinConver {
             for (int i = 0, len = arr.length; i < len; i++) {
                 if ((arr[i] + "").matches(regex)) {
                     sb.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], format)[0].charAt(0));
-                }else{
+                } else {
                     sb.append(arr[i]);
                 }
             }

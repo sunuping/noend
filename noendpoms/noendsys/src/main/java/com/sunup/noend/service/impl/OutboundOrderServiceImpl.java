@@ -6,6 +6,7 @@ import com.sunup.noend.entity.*;
 import com.sunup.noend.mapper.CompanyMapper;
 import com.sunup.noend.mapper.OrderMapper;
 import com.sunup.noend.mapper.OutboundOrderMapper;
+import com.sunup.noend.service.i.CommodityService;
 import com.sunup.noend.service.i.OutboundOrderService;
 import com.sunup.noend.util.RandomTools;
 import com.sunup.noend.util.StringTools;
@@ -34,6 +35,8 @@ public class OutboundOrderServiceImpl extends CommonServiceImpl<OutboundOrder> i
     private OutboundOrderMapper outboundOrderMapper;
     @Autowired
     private CompanyMapper companyMapper;
+    @Autowired
+    private CommodityService commodityService;
 
     @Override
     public List<OutboundOrder> allByOrderNumber(String orderNumber) {
@@ -49,6 +52,13 @@ public class OutboundOrderServiceImpl extends CommonServiceImpl<OutboundOrder> i
         //设置出库单
         int is = param.getAmounts().indexOf(',');
         if (is > -1) {
+            String[] amounts = param.getAmounts().split(",");
+            String[] commodityIds = param.getCommodityIds().split(",");
+            String[] lotNumbers = param.getLotNumbers().split(",");
+            String[] norms = param.getNorms().split(",");
+            String[] unitPrices = param.getUnitPrices().split(",");
+            String[] commodityNames = param.getCommodityNames().split(",");
+
             List<OutboundOrder> outboundOrders = null;
             final int size = param.getAmounts().split(",").length;
             outboundOrders = new ArrayList<>(size);
@@ -63,12 +73,18 @@ public class OutboundOrderServiceImpl extends CommonServiceImpl<OutboundOrder> i
                         .updateTime(new Date())
                         .remark("")
                         .orderNumber(orderNumber)
-                        .amount(Integer.parseInt(param.getAmounts().split(",")[i]))
-                        .commodityId(Integer.parseInt(param.getCommodityIds().split(",")[i]))
-                        .commodityLotNumber(param.getLotNumbers().split(",")[i])
-                        .commodityName(param.getCommodityNames().split(",")[i])
-                        .commodityNorm(param.getNorms().split(",")[i])
-                        .unitPrice(Double.parseDouble(param.getUnitPrices().split(",")[i]))
+                        .amount(Integer.parseInt(amounts[i]))
+                        .commodityId(Integer.parseInt(commodityIds[i]))
+                        .commodityLotNumber(lotNumbers[i])
+                        .commodityName(commodityNames[i])
+                        .commodityNorm(norms[i])
+                        .unitPrice(Double.parseDouble(unitPrices[i]))
+                        .build());
+                //扣去库存
+                Commodity commodity = commodityService.get(Integer.parseInt(commodityIds[i]));
+                commodityService.update(Commodity.builder()
+                        .id(Integer.parseInt(commodityIds[i]))
+                        .inventory((commodity.getInventory() - Integer.parseInt(amounts[i])))
                         .build());
             }
             success = super.add(outboundOrders);
@@ -81,6 +97,13 @@ public class OutboundOrderServiceImpl extends CommonServiceImpl<OutboundOrder> i
             outboundOrder.setCommodityName(param.getCommodityNames());
             outboundOrder.setOrderNumber(orderNumber);
             success = super.add(outboundOrder);
+
+            //扣去库存
+            Commodity commodity = commodityService.get(Integer.parseInt(param.getCommodityIds()));
+            commodityService.update(Commodity.builder()
+                    .id(Integer.parseInt(param.getCommodityIds()))
+                    .inventory((commodity.getInventory()- Integer.parseInt(param.getAmounts())))
+                    .build());
         }
 
         if (success > 0) {
@@ -103,6 +126,8 @@ public class OutboundOrderServiceImpl extends CommonServiceImpl<OutboundOrder> i
                     .updateUserId(user.getId())
                     .updateUsername(user.getUsername())
                     .build());
+
+
         }
 
         return success;
