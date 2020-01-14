@@ -2,34 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="720c95fc-9a1f-40e8-9065-3e9b5d565053" name="Default Changelist" comment="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块">
-      <change afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/banner.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/noendsys.log.2020-01-10.0.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/src/main/java/com/sunup/noend/util/PingyinConver.java" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/src/main/java/com/sunup/noend/util/PingyinConver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/classes/META-INF/noendcommon.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/classes/com/sunup/noend/util/PingyinConver.class" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/target/classes/com/sunup/noend/util/PingyinConver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/noendcommon-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/service/impl/OutboundOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/service/impl/OutboundOrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/service/impl/OutboundOrderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/service/impl/OutboundOrderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/noendsys-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/noendsys-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/sales/order/print.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/sales/order/print.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/sales/order/print.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/sales/order/print.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noendsys.log" beforeDir="false" afterPath="$PROJECT_DIR$/noendsys.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,6 +50,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -69,6 +59,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
@@ -125,7 +116,7 @@
       <workItem from="1578624261301" duration="7081000" />
       <workItem from="1578643586893" duration="299000" />
       <workItem from="1578877326457" duration="316000" />
-      <workItem from="1578984785845" duration="2199000" />
+      <workItem from="1578984785845" duration="7008000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块">
       <created>1578626150569</created>
@@ -134,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1578626150569</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="修复订单出库  减少库存  及拼音返回空不修改">
+      <created>1578987245265</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1578987245265</updated>
+    </task>
+    <task id="LOCAL-00003" summary="新增订单预览  订单打印（样式）">
+      <created>1578991547109</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1578991547109</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +150,9 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块" />
+    <MESSAGE value="修复订单出库  减少库存  及拼音返回空不修改" />
+    <MESSAGE value="新增订单预览  订单打印（样式）" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增订单预览  订单打印（样式）" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="89" key="#Notifications" timestamp="1578877555104">
@@ -168,46 +175,46 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="530" y="177" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.860@0.0.1600.860" timestamp="1578625747010" />
-    <state x="358" y="24" key="CommitChangelistDialog2" timestamp="1578987148002">
+    <state x="358" y="24" key="CommitChangelistDialog2" timestamp="1578991541132">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="358" y="24" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1578987148002" />
+    <state x="358" y="24" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1578991541132" />
     <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1578625394794">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1578625394794" />
-    <state width="1557" height="226" key="GridCell.Tab.0.bottom" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.0.bottom" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.0.center" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
+    <state width="1557" height="225" key="GridCell.Tab.0.center" timestamp="1578988414838">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.0.left" timestamp="1578987096786">
+    <state width="1557" height="225" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1578988414838" />
+    <state width="1557" height="225" key="GridCell.Tab.0.left" timestamp="1578988414838">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1578987096786" />
-    <state width="1557" height="226" key="GridCell.Tab.0.right" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1578988414835" />
+    <state width="1557" height="225" key="GridCell.Tab.0.right" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.1.bottom" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
+    <state width="1557" height="225" key="GridCell.Tab.1.bottom" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.1.center" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
+    <state width="1557" height="225" key="GridCell.Tab.1.center" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.1.left" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
+    <state width="1557" height="225" key="GridCell.Tab.1.left" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
-    <state width="1557" height="226" key="GridCell.Tab.1.right" timestamp="1578987096787">
+    <state width="1557" height="225" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
+    <state width="1557" height="225" key="GridCell.Tab.1.right" timestamp="1578988414839">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="226" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1578987096787" />
+    <state width="1557" height="225" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
     <state width="1557" height="236" key="GridCell.Tab.2.bottom" timestamp="1578986669517">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -224,18 +231,26 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1557" height="236" key="GridCell.Tab.2.right/0.0.1600.860@0.0.1600.860" timestamp="1578986669517" />
+    <state x="614" y="364" key="ReplaceDuplicatesPrompt" timestamp="1578987995457">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="614" y="364" key="ReplaceDuplicatesPrompt/0.0.1600.860@0.0.1600.860" timestamp="1578987995457" />
     <state x="301" y="72" key="SettingsEditor" timestamp="1578624560176">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="72" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1578624560176" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1578626168877">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1578991549281">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1578626168877" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1578991549281" />
     <state x="480" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1578622387882">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="480" y="254" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1578622387882" />
+    <state x="716" y="263" width="540" height="501" key="extract.method.dialog" timestamp="1578987992072">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="716" y="263" width="540" height="501" key="extract.method.dialog/0.0.1600.860@0.0.1600.860" timestamp="1578987992072" />
     <state x="515" y="221" key="git4idea.merge.GitPullDialog" timestamp="1578984971289">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
