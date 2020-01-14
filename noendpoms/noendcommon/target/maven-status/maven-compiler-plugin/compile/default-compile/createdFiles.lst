@@ -34,7 +34,6 @@ com\sunup\noend\entity\Commodity$CommodityBuilder.class
 com\sunup\noend\entity\Log.class
 com\sunup\noend\enums\RoleEnum$4.class
 com\sunup\noend\enums\Operation.class
-com\sunup\noend\util\Base64AndImgConverTools.class
 com\sunup\noend\constant\OutboundOrderConstant.class
 com\sunup\noend\mapper\CommodityMapper.class
 com\sunup\noend\mapper\OrderMapper.class
@@ -50,6 +49,7 @@ com\sunup\noend\enums\RoleEnum$1.class
 com\sunup\noend\mapper\MenuRoleMapper.class
 com\sunup\noend\entity\OutboundOrderParam.class
 com\sunup\noend\entity\RoleUser.class
+com\sunup\noend\util\ExcelUtil.class
 com\sunup\noend\handler\exception\UnknownAccountException.class
 com\sunup\noend\util\RandomTools.class
 com\sunup\noend\util\Md5Tools.class

@@ -7,16 +7,41 @@
     height: 20px;
     line-height: 25px;
 }
+.tdh{
+    height: 25px;
+}
+/*居右*/
 .tdr{
     text-align: right;
 }
+/*居左*/
 .tdl{
     text-align: left;
 }
+/*居中*/
 .tdc{
     text-align: center;
     margin: 0px auto;
 }
+/*去掉边框*/
 .tdbn{
     border: 0px;
+}
+/*显示左上边框*/
+.tdblts{
+    border-left: 1px solid #000000;
+    border-top: 1px solid #000000;
+}
+/*显示右边框*/
+.tdbrs{
+    border-right: 1px solid #000000;
+}
+/*显示下边框*/
+.tdbbs{
+    border-bottom: 1px solid #000000;
+}
+/*显示右下边框*/
+.tdbrbs{
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
 }

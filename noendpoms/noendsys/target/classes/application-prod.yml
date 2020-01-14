@@ -22,7 +22,7 @@ spring:
       enabled: true
 #开启thymeleaf缓存
   thymeleaf:
-    cache: true
+    cache: false
 
   #config alibaba druid
   datasource:

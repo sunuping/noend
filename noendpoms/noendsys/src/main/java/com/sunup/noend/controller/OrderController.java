@@ -29,16 +29,33 @@ public class OrderController {
     @Autowired
     private OutboundOrderService outboundOrderService;
 
+    @GetMapping("print-preview")
+    public String preview(int id, Model model) {
+        String temp = path + "print-preview";
+        setPrintParams(id, model, temp);
+        return temp;
+    }
+
     @GetMapping("print")
-    public String print(int id,Model model){
+    public String print(int id, Model model) {
+        String temp = path + "print";
+        setPrintParams(id, model, temp);
+        return temp;
+    }
+
+    /**
+     * 设置打印数据
+     * @param id
+     * @param model
+     * @param temp
+     */
+    private void setPrintParams(int id, Model model, String temp) {
         Order order = orderService.get(id);
         List<OutboundOrder> outboundOrders = outboundOrderService.allByOrderNumber(order.getOrderNumber());
-        String temp = path + "print";
         model.addAttribute("path", temp);
-        model.addAttribute("order",order);
-        model.addAttribute("outboundOrders",outboundOrders);
-        model.addAttribute("outboundOrderSize",outboundOrders.size());
-        return temp;
+        model.addAttribute("order", order);
+        model.addAttribute("outboundOrders", outboundOrders);
+        model.addAttribute("outboundOrderSize", outboundOrders.size());
     }
 
     @GetMapping("list")
@@ -50,7 +67,7 @@ public class OrderController {
 
     @PostMapping("list")
     @ResponseBody
-    public Page list(Page page,@RequestParam(name = "search[value]", defaultValue = "") String searchValue) {
+    public Page list(Page page, @RequestParam(name = "search[value]", defaultValue = "") String searchValue) {
         page.setSearchValue(searchValue);
         Page temp = orderService.page(page);
         return Page.builder().data(temp.getData())
