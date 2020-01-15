@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @Description
  * @Date : Create in 11:23 2019/12/10
  * @EnableWebSecurity注解开启Spring Security的功能
- * 使用@EnableGlobalMethodSecurity(prePostEnabled = true)这个注解，可以开启security的注解，我们可以在需要控制权限的方法上面使用@PreAuthorize，@PreFilter这些注解。
+ * 使用@EnableGlobalMethodSecurity(prePostEnabled = true)这个注解，可以开启security的注解，在需要控制权限的方法上面使用@PreAuthorize，@PreFilter这些注解。
  */
 @Configuration
 @EnableWebSecurity
@@ -24,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SysUserDetailsService userDetailsService;
+
 
 
     @Override
@@ -44,9 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //关闭跨站请求伪造
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/static/**","/css/**", "/js/**", "/assets/**", "/googleapis/**", "/libs/**", "/favicon.png").permitAll()
+                .antMatchers("/static/**","/css/**", "/js/**", "/assets/**", "/googleapis/**", "/libs/**", "/favicon.png","/getVerificationImage").permitAll()
                 //其他登录后访问
                 .antMatchers("/**").hasRole("ADMIN");
+        //不拦截的
         // 解决不允许显示在iframe的问题
         http.headers().frameOptions().disable();
         //开启自动配置的登录功能
@@ -56,7 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /*开启记住我功能（开启后,springboot会给浏览器发送一个cookies,以后访问网站都会带上这个cookies给springboot验证,springboot会检查以前某一个用户的cookies
         的值是什么,如果找到了,这个用户就不用再次登录了,注销时候springboot会发送命令给浏览器删除cookies）*/
         http.rememberMe();
-        http.csrf().disable();
 
     }
 

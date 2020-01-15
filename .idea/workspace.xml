@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="720c95fc-9a1f-40e8-9065-3e9b5d565053" name="Default Changelist" comment="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块">
+      <change afterPath="$PROJECT_DIR$/noendpoms/noendcommon/src/main/java/com/sunup/noend/util/VerificationImage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/config/WebMvcConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/noendsys.log.2020-01-10.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noendsys.log.2020-01-14.0.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/sales/order/print.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/sales/order/print.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/sales/order/print.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/sales/order/print.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendcommon/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/service/impl/SysUserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/java/com/sunup/noend/service/impl/SysUserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/service/impl/SysUserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/com/sunup/noend/service/impl/SysUserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/noendpoms/noendsys/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noendsys.log" beforeDir="false" afterPath="$PROJECT_DIR$/noendsys.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -116,7 +129,8 @@
       <workItem from="1578624261301" duration="7081000" />
       <workItem from="1578643586893" duration="299000" />
       <workItem from="1578877326457" duration="316000" />
-      <workItem from="1578984785845" duration="7008000" />
+      <workItem from="1578984785845" duration="7337000" />
+      <workItem from="1579051674026" duration="8223000" />
     </task>
     <task id="LOCAL-00001" summary="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块">
       <created>1578626150569</created>
@@ -139,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578991547109</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="调整票据样式">
+      <created>1578991953543</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578991953543</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +173,8 @@
     <MESSAGE value="初步完成 销售管理模块 》商品模块 企业模块 出库模块 订单模块" />
     <MESSAGE value="修复订单出库  减少库存  及拼音返回空不修改" />
     <MESSAGE value="新增订单预览  订单打印（样式）" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增订单预览  订单打印（样式）" />
+    <MESSAGE value="调整票据样式" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整票据样式" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="89" key="#Notifications" timestamp="1578877555104">
@@ -163,6 +185,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1578625716004" />
+    <state x="605" y="140" key="#com.intellij.ide.util.MemberChooser" timestamp="1579060190645">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="605" y="140" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1579060190645" />
     <state x="552" y="240" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1578625398300">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -175,62 +201,62 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="530" y="177" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.860@0.0.1600.860" timestamp="1578625747010" />
-    <state x="358" y="24" key="CommitChangelistDialog2" timestamp="1578991541132">
+    <state x="358" y="24" key="CommitChangelistDialog2" timestamp="1579070540475">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="358" y="24" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1578991541132" />
+    <state x="358" y="24" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1579070540475" />
     <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1578625394794">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1578625394794" />
-    <state width="1557" height="225" key="GridCell.Tab.0.bottom" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.0.bottom" timestamp="1579070227280">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="225" key="GridCell.Tab.0.center" timestamp="1578988414838">
+    <state width="1557" height="102" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1579070227280" />
+    <state width="1557" height="102" key="GridCell.Tab.0.center" timestamp="1579070227280">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1578988414838" />
-    <state width="1557" height="225" key="GridCell.Tab.0.left" timestamp="1578988414838">
+    <state width="1557" height="102" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1579070227280" />
+    <state width="1557" height="102" key="GridCell.Tab.0.left" timestamp="1579070227280">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1578988414835" />
-    <state width="1557" height="225" key="GridCell.Tab.0.right" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1579070227280" />
+    <state width="1557" height="102" key="GridCell.Tab.0.right" timestamp="1579070227280">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="225" key="GridCell.Tab.1.bottom" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1579070227280" />
+    <state width="1557" height="102" key="GridCell.Tab.1.bottom" timestamp="1579070215056">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="225" key="GridCell.Tab.1.center" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1579070215056" />
+    <state width="1557" height="102" key="GridCell.Tab.1.center" timestamp="1579070215056">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="225" key="GridCell.Tab.1.left" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1579070215056" />
+    <state width="1557" height="102" key="GridCell.Tab.1.left" timestamp="1579070215056">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="225" key="GridCell.Tab.1.right" timestamp="1578988414839">
+    <state width="1557" height="102" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1579070215056" />
+    <state width="1557" height="102" key="GridCell.Tab.1.right" timestamp="1579070215056">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="225" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1578988414839" />
-    <state width="1557" height="236" key="GridCell.Tab.2.bottom" timestamp="1578986669517">
+    <state width="1557" height="102" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1579070215056" />
+    <state width="1557" height="296" key="GridCell.Tab.2.bottom" timestamp="1579062124041">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="236" key="GridCell.Tab.2.bottom/0.0.1600.860@0.0.1600.860" timestamp="1578986669517" />
-    <state width="1557" height="236" key="GridCell.Tab.2.center" timestamp="1578986669517">
+    <state width="1557" height="296" key="GridCell.Tab.2.bottom/0.0.1600.860@0.0.1600.860" timestamp="1579062124041" />
+    <state width="1557" height="296" key="GridCell.Tab.2.center" timestamp="1579062124041">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="236" key="GridCell.Tab.2.center/0.0.1600.860@0.0.1600.860" timestamp="1578986669517" />
-    <state width="1557" height="236" key="GridCell.Tab.2.left" timestamp="1578986669517">
+    <state width="1557" height="296" key="GridCell.Tab.2.center/0.0.1600.860@0.0.1600.860" timestamp="1579062124041" />
+    <state width="1557" height="296" key="GridCell.Tab.2.left" timestamp="1579062124041">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="236" key="GridCell.Tab.2.left/0.0.1600.860@0.0.1600.860" timestamp="1578986669517" />
-    <state width="1557" height="236" key="GridCell.Tab.2.right" timestamp="1578986669517">
+    <state width="1557" height="296" key="GridCell.Tab.2.left/0.0.1600.860@0.0.1600.860" timestamp="1579062124041" />
+    <state width="1557" height="296" key="GridCell.Tab.2.right" timestamp="1579062124041">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="236" key="GridCell.Tab.2.right/0.0.1600.860@0.0.1600.860" timestamp="1578986669517" />
+    <state width="1557" height="296" key="GridCell.Tab.2.right/0.0.1600.860@0.0.1600.860" timestamp="1579062124041" />
     <state x="614" y="364" key="ReplaceDuplicatesPrompt" timestamp="1578987995457">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -239,10 +265,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="72" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1578624560176" />
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1578991549281">
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2" timestamp="1578991955093">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1578991549281" />
+    <state x="392" y="163" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1578991955093" />
     <state x="480" y="254" key="com.intellij.ide.util.TipDialog" timestamp="1578622387882">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -255,5 +281,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="515" y="221" key="git4idea.merge.GitPullDialog/0.0.1600.860@0.0.1600.860" timestamp="1578984971289" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1579058120099">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1579058120099" />
   </component>
 </project>

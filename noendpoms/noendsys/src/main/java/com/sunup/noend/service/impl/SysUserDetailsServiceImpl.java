@@ -4,6 +4,7 @@ import com.sunup.noend.constant.CommonConstant;
 import com.sunup.noend.entity.User;
 import com.sunup.noend.service.i.SysUserDetailsService;
 import com.sunup.noend.service.i.UserService;
+import com.sunup.noend.util.VerificationImage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,11 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Author Janly
- * @Description
- * @Date : Create in 11:42 2019/12/10
- */
+
 @Service
 @Slf4j
 public class SysUserDetailsServiceImpl implements SysUserDetailsService {
@@ -33,12 +30,25 @@ public class SysUserDetailsServiceImpl implements SysUserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String accountNumber) throws UsernameNotFoundException {
+        HttpSession session = request.getSession();
+
+        //获取随机验证码
+        String inputVerificationCode = request.getParameter("verificationCode");
+        String verificationCode = session.getAttribute(VerificationImage.SESSION_KEY).toString();
+        if (inputVerificationCode==null||!inputVerificationCode.equals(verificationCode)){
+            throw new RuntimeException("验证码输入错误！");
+        }
+
+
         User user = userService.getByAccountNumber(accountNumber);
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在!");
         }
 
-        HttpSession session = request.getSession();
+
+        //
+
+
         session.setAttribute(CommonConstant.LOGIN_SUCCESS_USER_SESSION_KEY, user);
         session.setAttribute("success_user", accountNumber);
 
