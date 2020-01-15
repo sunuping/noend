@@ -85,7 +85,6 @@ public class VerificationImage {
     private static String drawString(Graphics g, String randomString, int i) {
         g.setFont(getFont());
         g.setColor(getRandomColor(108, 190));
-        System.out.println(randomString.length());
         String rand = getRandomString(random.nextInt(randomString.length()==0?1:randomString.length()));
         randomString += rand;
         g.translate(random.nextInt(3), random.nextInt(6));
@@ -112,8 +111,6 @@ public class VerificationImage {
         for (int i = 0; i < stringNum; i++) {
             random_string = drawString(g, random_string, i);
         }
-
-        System.out.println(random_string);
 
         g.dispose();
 
