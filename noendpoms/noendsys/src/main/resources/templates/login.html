@@ -75,16 +75,7 @@
                             <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">登录</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                            <div class="social">
-                                <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="Login with Facebook"> <i
-                                        aria-hidden="true" class="fab fa-facebook-f"></i> </a>
-                                <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="Login with Google"> <i
-                                        aria-hidden="true" class="fab fa-google-plus-g"></i> </a>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
                             还没有帐号？ <a href="login/register" class="text-info m-l-5"><b>去注册</b></a>
@@ -112,14 +103,12 @@
         </div>
     </div>
 </section>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js" type="module"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $(".preloader").fadeOut();
-        $('[data-toggle="tooltip"]').tooltip()
         $('#to-recover').on("click", function () {
             $("#loginform").slideUp();
             $("#recoverform").fadeIn();
